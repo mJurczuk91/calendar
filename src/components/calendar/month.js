@@ -1,9 +1,15 @@
 import React from 'react';
+import { Day } from './day';
 
 export const Month = () => {
-    return (
-    <div>
+    let month = [];
+    for(let i = 0; i< 30; i++){
+        month.push(<Day key={i}/>)
+    }
 
-    </div>
+    return (
+        <div>
+            {month}
+        </div>
     )
 }
