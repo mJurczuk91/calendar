@@ -1,5 +1,7 @@
 import React from 'react';
-import { Day } from './day';
+import { Day } from './Day';
+
+import classes from './Week.module.css';
 
 const buildWeek = (currentDate) => {
     console.log(currentDate.getDate(), currentDate.getDay());
@@ -19,9 +21,9 @@ const buildWeek = (currentDate) => {
 }
 
 export const Week = ({currentDate}) => {
-    const week = buildWeek(currentDate)
+    const week = buildWeek(currentDate);
 
-    return <div style={{display: 'flex'}}>
+    return <div className={classes.week}>
         {
             week
         }

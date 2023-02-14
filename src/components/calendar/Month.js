@@ -1,5 +1,5 @@
 import React from 'react';
-import { Day } from './day';
+import { Day } from './Day';
 
 export const Month = () => {
     return (
