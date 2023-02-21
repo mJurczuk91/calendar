@@ -1,12 +1,12 @@
 import React from 'react';
-import classes from './Day.module.css'
-import { Task } from '../task/task';
+import classes from './day.module.css'
+import Task from '../task/task';
 
 const listHours = (currentDate, stepMinutes, hourFrom, hourTo) => {
     
 }
 
-export const Day = (props) => {
+const Day = (props) => {
     console.log('day');
     return <>
         <div className={classes.day}>
@@ -15,3 +15,5 @@ export const Day = (props) => {
     </>
 
 }
+
+export default Day;

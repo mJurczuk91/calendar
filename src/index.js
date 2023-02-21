@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { store } from './store';
-import { CalendarDashboard } from './components/calendar/CalendarDashboard';
+import store from './components/store/store';
+import CalendarDashboard from './components/calendar/calendar-dashboard';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

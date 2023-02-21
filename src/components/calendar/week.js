@@ -1,31 +1,30 @@
 import React from 'react';
-import { Day } from './Day';
+import Day from './day';
 
-import classes from './Week.module.css';
+import classes from './week.module.css';
 
 const buildWeek = (currentDate) => {
-    console.log(currentDate.getDate(), currentDate.getDay());
     const week = [];
 
     let sunday = new Date();
     sunday.setDate(currentDate.getDate() - currentDate.getDay());
-    console.log(sunday);
 
     for(let i = 1; i < 7; i++){
         let date = new Date();
         date.setDate(sunday + 1);
-        week.push(<Day date={date}/>)
+        week.push(<Day key={i} date={date}/>)
     }
-    week.push(<Day date={sunday}/>);
+    week.push(<Day key={7} date={sunday}/>);
+    
     return week;
 }
 
-export const Week = ({currentDate}) => {
+const Week = ({currentDate}) => {
     const week = buildWeek(currentDate);
 
     return <div className={classes.week}>
-        {
-            week
-        }
+        {week}
     </div>
 }
+
+export default Week;
