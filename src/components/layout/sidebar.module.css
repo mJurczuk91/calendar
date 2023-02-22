@@ -2,7 +2,7 @@
     height: 100%;
     width: 20%;
     min-width: 15rem;
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     padding-top: 5%;

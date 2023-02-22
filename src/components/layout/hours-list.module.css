@@ -1,0 +1,37 @@
+.hour{
+    position: relative;
+    border-right: 1px solid #575757;
+    border-top: 1px solid #575757;
+    border-image: linear-gradient(to left, #575757 50%, transparent 50%) 1;
+    width: 5%;
+    height: 3rem;
+}
+
+.hour:last-of-type{
+    border-right: 1px solid #575757;
+    border-bottom: 1px solid #575757;
+    border-image: linear-gradient(to left, #575757 50%, transparent 50%) 1;
+    width: 5%;
+    height: 3rem;
+}
+
+.hour p{
+    padding-right: 4%;
+    position: absolute;
+    text-align: right;
+    font-size: small;
+    bottom: -30%;
+    right: 0;
+}
+
+.hour:nth-of-type(1){
+    border-top: 0px;
+}
+
+.hour:nth-of-type(odd){
+    background-color: rgb(235, 235, 235);
+}
+
+.hour:nth-child(4n+2){
+    font-weight: 600;
+}

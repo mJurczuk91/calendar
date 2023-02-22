@@ -1,14 +1,19 @@
 import React from 'react';
-import Month from './month';
-import Week from './week';
 import Sidebar from '../layout/sidebar';
+import HoursList from '../layout/hours-list';
+import Day from './day';
+
+import classes from './calendar-dashboard.module.css'
 
 const CalendarDashboard = () => {
     let currentDate = new Date(Date.now());
 
     return <>
+        <div className={classes.calendar}>
         <Sidebar />
-        <Week currentDate={currentDate}/>
+            <HoursList />
+        </div>
+        {/*         <Week currentDate={currentDate}/> */}
     </>
 }
 
