@@ -10,7 +10,8 @@ export const renderDatepicker = () => {
             datepickerSlice,
         }
     });
+    
     render(<Provider store={store}>
         <Datepicker />
-    </Provider>)
+    </Provider>);
 }

@@ -3,7 +3,7 @@ import { getMonthNameInPolish } from '../utils/datepicker-utils';
 import classes from './navbar.module.scss';
 
 const DatepickerNavbar: React.FC = () => {
-    const dates = useDatepicker();
+    const {dates} = useDatepicker();
     return (
         <div>
             <p>
