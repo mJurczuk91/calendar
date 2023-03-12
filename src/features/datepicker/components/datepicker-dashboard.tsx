@@ -1,23 +1,20 @@
 import useDatepicker from "../hooks/useDatepicker";
-import { getLastDayOfMonth } from "../utils/datepicker-utils";
 
 const DatepickerDashboard:React.FC = () => {
     const {dates, setNextMonth, setPreviousMonth, setDay} = useDatepicker();
 
     const buildWeeks = () => {
         const calendar = [];
-        const monthStart = new Date(dates.viewYear, dates.viewMonth, 1);
-        const firstWeekStart = new Date(monthStart);
+        //brzydkie modyfikacje na obiekcie date, ale taki urok wbudowanych w js dat
+        //cofam po jednym dniu aż dojdzie do dnia tygodnia nr 1, czyli w date js poniedziałek (0 to niedziela)
+        const firstWeekStart = new Date(dates.viewYear, dates.viewMonth, 1);
         while(firstWeekStart.getDay() > 1){
             firstWeekStart.setDate(firstWeekStart.getDate() - 1);
         }
-        const lastWeeksEnd = new Date(firstWeekStart);
-        // wyświetla zawsze 6 tygodni, to nigdy nie trzeba zmieniać wielkości kalendarza (ilości rzędów), inaczej czasem by miał 5 czasem 6 tygodni
-        lastWeeksEnd.setDate(lastWeeksEnd.getDate() + 41);
-        console.log(firstWeekStart.toString(), lastWeeksEnd.toString());
-        const currentDay = new Date(firstWeekStart);
 
-        while(currentDay.getTime() <= lastWeeksEnd.getTime()){
+        // wyświetla zawsze 6 tygodni, to nigdy nie trzeba zmieniać wielkości kalendarza (ilości rzędów), inaczej czasem by miał 5 czasem 6 tygodni
+        const currentDay = new Date(firstWeekStart);
+        for(let i = 0; i < 6; i++){
             let week = [];
             let weekDay = 0;
             while(weekDay <= 6){

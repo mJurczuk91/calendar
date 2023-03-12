@@ -7,7 +7,6 @@ export interface IDateSlice {
     pickedDay: number,
     pickedMonth: number,
     pickedYear: number,
-    pickedDate: Date,
 };
 
 let currentDate = new Date();
@@ -17,7 +16,6 @@ const initialState:IDateSlice = {
     pickedDay: currentDate.getDay(),
     pickedMonth: currentDate.getMonth(),
     pickedYear: currentDate.getFullYear(),
-    pickedDate: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDay()),
 };
 
 const DatepickerSlice = createSlice({
@@ -31,6 +29,7 @@ const DatepickerSlice = createSlice({
             } else {
                 state.viewMonth++;
             }
+            console.log(state.viewMonth)
         },
         previousViewMonth(state){
             if(state.viewMonth === 0){
@@ -44,7 +43,6 @@ const DatepickerSlice = createSlice({
             state.pickedDay = action.payload;
             state.pickedMonth = state.viewMonth;
             state.pickedYear = state.viewYear;
-            state.pickedDate = new Date(state.viewYear, state.viewMonth, action.payload);
         },
     }
 });
