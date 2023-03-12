@@ -1,20 +1,21 @@
 import useDatepicker from '../hooks/useDatepicker';
+import useSetDatepicker from '../hooks/useSetDatepicker';
 import { getMonthNameInPolish } from '../utils/datepicker-utils';
-import classes from './navbar.module.scss';
 
 const DatepickerNavbar: React.FC = () => {
-    const {dates, setPreviousMonth, setNextMonth} = useDatepicker();
+    const { viewPreviousMonth, viewNextMonth } = useSetDatepicker();
+    const {viewMonth, viewYear} = useDatepicker();
     return (
         <div>
             <p>
-                {getMonthNameInPolish(dates.viewMonth)}
+                {getMonthNameInPolish(viewMonth)}
             </p>
             <p>
-                {dates.viewYear}
+                {viewYear}
             </p>
             <div>
-                <button onClick={() => { setPreviousMonth(); }}>{`<`}</button>
-                <button onClick={() => { setNextMonth(); }}>{`>`}</button>
+                <button onClick={() => { viewPreviousMonth(); }}>{`<`}</button>
+                <button onClick={() => { viewNextMonth(); }}>{`>`}</button>
             </div>
         </div>
     )

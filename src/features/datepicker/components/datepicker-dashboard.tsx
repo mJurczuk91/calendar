@@ -1,7 +1,10 @@
 import useDatepicker from "../hooks/useDatepicker";
+import useSetDatepicker from "../hooks/useSetDatepicker";
+import classes from "./datepicker-dashboard.module.scss";
 
 const DatepickerDashboard:React.FC = () => {
-    const {dates, setNextMonth, setPreviousMonth, setDay} = useDatepicker();
+    const {setPickedDay} = useSetDatepicker();
+    const dates = useDatepicker();
 
     const buildWeeks = () => {
         const calendar = [];
@@ -12,27 +15,34 @@ const DatepickerDashboard:React.FC = () => {
             firstWeekStart.setDate(firstWeekStart.getDate() - 1);
         }
 
+        const dayClickHandler = (date:Date) => {
+            const day = date.getDate();
+            const month = date.getMonth();
+            const year = date.getFullYear();
+            return () => {
+                setPickedDay({day, month, year});
+            }
+        }
+
         // wyświetla zawsze 6 tygodni, to nigdy nie trzeba zmieniać wielkości kalendarza (ilości rzędów), inaczej czasem by miał 5 czasem 6 tygodni
-        const currentDay = new Date(firstWeekStart);
+        const incrementingDay = new Date(firstWeekStart);
+        console.log(incrementingDay.getFullYear(), incrementingDay.getMonth(), incrementingDay.getDate());
         for(let i = 0; i < 6; i++){
             let week = [];
             let weekDay = 0;
             while(weekDay <= 6){
+                let currentDay = new Date(incrementingDay);
                 week.push(
                     <div
-                        key={currentDay.getTime()}
-                        className={""}
-                        onClick={
-                            currentDay.getMonth() === dates.viewMonth ? () => { setDay(currentDay.getDate()); } :
-                            currentDay.getMonth() < dates.viewMonth ? () => { setPreviousMonth(); setDay(currentDay.getDate()); } :
-                            () => { setNextMonth(); setDay(currentDay.getDate()) }
-                        }
+                        key={incrementingDay.getTime()}
+                        className={classes.day}
+                        onClick={dayClickHandler(currentDay)}
                     >
-                        {currentDay.getDate()}
+                        {incrementingDay.getDate()}
                     </div>
                 );
                 weekDay++;
-                currentDay.setDate(currentDay.getDate() + 1);
+                incrementingDay.setDate(incrementingDay.getDate() + 1);
             }
             calendar.push(week);
         }

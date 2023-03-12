@@ -1,6 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../../store/store";
 
+export interface ISetDate {
+    day: number,
+    month: number,
+    year: number,
+}
+
 export interface IDateSlice {
     viewMonth: number,
     viewYear: number,
@@ -10,7 +16,7 @@ export interface IDateSlice {
 };
 
 let currentDate = new Date();
-const initialState:IDateSlice = {
+const initialState: IDateSlice = {
     viewMonth: currentDate.getMonth(),
     viewYear: currentDate.getFullYear(),
     pickedDay: currentDate.getDay(),
@@ -22,8 +28,8 @@ const DatepickerSlice = createSlice({
     name: "datepickerSlice",
     initialState,
     reducers: {
-        nextViewMonth(state){
-            if(state.viewMonth === 11){
+        setNextViewMonth(state) {
+            if (state.viewMonth === 11) {
                 state.viewMonth = 0;
                 state.viewYear++;
             } else {
@@ -31,22 +37,29 @@ const DatepickerSlice = createSlice({
             }
             console.log(state.viewMonth)
         },
-        previousViewMonth(state){
-            if(state.viewMonth === 0){
+        setPreviousViewMonth(state) {
+            if (state.viewMonth === 0) {
                 state.viewMonth = 11;
                 state.viewYear--;
             } else {
                 state.viewMonth--;
             }
         },
-        setPickedDate(state, action:PayloadAction<number>){
-            state.pickedDay = action.payload;
-            state.pickedMonth = state.viewMonth;
-            state.pickedYear = state.viewYear;
+        setDate(state, {payload: {day, month, year}}: PayloadAction<ISetDate>) {
+            console.log(day, month, year);
+            console.log(state.viewMonth, state.viewYear)
+            
+            state.pickedDay = day;
+            state.pickedMonth = month;
+            state.pickedYear = year;
+
+
+            if(state.viewMonth !== month) state.viewMonth = month;
+            if(state.viewYear !== year) state.viewYear = year;
         },
     }
 });
 
-export const {nextViewMonth, previousViewMonth, setPickedDate} = DatepickerSlice.actions;
+export const { setDate, setNextViewMonth, setPreviousViewMonth } = DatepickerSlice.actions;
 export const selectPickedDate = (state: RootState) => state.datepickerSlice;
 export default DatepickerSlice.reducer;
