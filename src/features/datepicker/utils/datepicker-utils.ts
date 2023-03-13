@@ -1,6 +1,6 @@
 export const getLastDayOfMonth = (m: number, y: number):number => {
     m=m+1;
-    return m===2 ? y & 3 || !(y%25) && y & 15 ? 28 : 29 : 30 + (m+(m>>3)&1);
+    return m===2 ? y & 3 || (!(y%25) && y & 15) ? 28 : 29 : 30 + (m+(m>>3)&1);
     // https://stackoverflow.com/questions/222309/calculate-last-day-of-month
 }
 
@@ -10,6 +10,20 @@ export const getAllDaysInMonth = (month:number, year:number):number[] => {
         days.push(day);
     }
     return days;
+}
+
+export const sameDayMonthYear = (date1:Date, date2:Date):boolean => {
+    if(date1.getDate() !== date2.getDate()) return false;
+    if(date1.getMonth() !== date2.getMonth()) return false;
+    if(date1.getFullYear() !== date2.getFullYear()) return false;
+
+    return true;
+}
+
+export const sameMonth = (date1:Date, date2:Date):boolean => {
+    if(date1.getMonth() !== date2.getMonth()) return false;
+
+    return true;
 }
 
 export const getMonthNameInPolish = (month:number):string => {

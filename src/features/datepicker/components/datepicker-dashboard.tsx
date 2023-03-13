@@ -1,44 +1,47 @@
 import useDatepicker from "../hooks/useDatepicker";
 import useSetDatepicker from "../hooks/useSetDatepicker";
+import { sameDayMonthYear, sameMonth } from "../utils/datepicker-utils";
 import classes from "./datepicker-dashboard.module.scss";
 
-const DatepickerDashboard:React.FC = () => {
-    const {setPickedDay} = useSetDatepicker();
+const DatepickerDashboard: React.FC = () => {
+    const { setPickedDay } = useSetDatepicker();
     const dates = useDatepicker();
+    const today = new Date();
 
     const buildWeeks = () => {
         const calendar = [];
-        //brzydkie modyfikacje na obiekcie date, ale taki urok wbudowanych w js dat
-        //cofam po jednym dniu aż dojdzie do dnia tygodnia nr 1, czyli w date js poniedziałek (0 to niedziela)
         const firstWeekStart = new Date(dates.viewYear, dates.viewMonth, 1);
-        while(firstWeekStart.getDay() > 1){
+        while (firstWeekStart.getDay() > 1) {
             firstWeekStart.setDate(firstWeekStart.getDate() - 1);
         }
 
-        const dayClickHandler = (date:Date) => {
+        const dayClickHandler = (date: Date) => {
             const day = date.getDate();
             const month = date.getMonth();
             const year = date.getFullYear();
             return () => {
-                setPickedDay({day, month, year});
+                setPickedDay({ day, month, year });
             }
         }
 
-        // wyświetla zawsze 6 tygodni, to nigdy nie trzeba zmieniać wielkości kalendarza (ilości rzędów), inaczej czasem by miał 5 czasem 6 tygodni
+
         const incrementingDay = new Date(firstWeekStart);
-        console.log(incrementingDay.getFullYear(), incrementingDay.getMonth(), incrementingDay.getDate());
-        for(let i = 0; i < 6; i++){
+        for (let i = 0; i < 6; i++) {
             let week = [];
             let weekDay = 0;
-            while(weekDay <= 6){
+            while (weekDay <= 6) {
                 let currentDay = new Date(incrementingDay);
                 week.push(
                     <div
                         key={incrementingDay.getTime()}
-                        className={classes.day}
+                        className={
+                            sameDayMonthYear(currentDay, today) ? classes.today :
+                            sameDayMonthYear(currentDay, new Date(dates.pickedYear, dates.pickedMonth, dates.pickedDay)) ? classes.pickedDay :
+                            sameMonth(currentDay, new Date(dates.pickedYear, dates.pickedMonth, dates.pickedDay)) ? classes.currentMonth : ''
+                    }
                         onClick={dayClickHandler(currentDay)}
-                    >
-                        {incrementingDay.getDate()}
+                    >      
+                    {incrementingDay.getDate()}           
                     </div>
                 );
                 weekDay++;
@@ -48,9 +51,12 @@ const DatepickerDashboard:React.FC = () => {
         }
         return calendar;
     }
-    
+
     return <>
-        {buildWeeks()}
+        <div className={classes.container}>
+            <div>Pn</div><div>Wt</div><div>Śr</div><div>Cz</div><div>Pt</div><div>Sb</div><div>Nd</div>
+            {buildWeeks()}
+        </div>
     </>
 }
 

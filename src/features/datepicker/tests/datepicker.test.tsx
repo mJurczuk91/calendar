@@ -6,14 +6,12 @@ import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
 
 describe("DATEPICKER_TESTS", () => {
-    ////
     test('it renders current month name in polish', () => {
         renderDatepicker();
         const month = getMonthNameInPolish(new Date().getMonth());
         expect(screen.queryByText(month)).toBeInTheDocument();
     });
 
-    ////
     test('it renders all the days of the month', () => {
         renderDatepicker();
         const day = getLastDayOfMonth(new Date().getMonth(), new Date().getFullYear());
@@ -23,14 +21,12 @@ describe("DATEPICKER_TESTS", () => {
         };
     });
 
-    ////
     test("it renders currently viewed year", () => {
         renderDatepicker();
         const year = new Date().getFullYear();
         expect(screen.getByText(year.toString())).toBeInTheDocument();
     });
 
-    ////
     test("it renders select previous and select next month buttons", () => {
         renderDatepicker();
         const buttons = ['<', '>'];
@@ -39,7 +35,6 @@ describe("DATEPICKER_TESTS", () => {
         });
     });
 
-    ////
     test('clicking < button displays previous month', () => {
         renderDatepicker();
         const button = screen.getByRole("button", {name: '<'});
@@ -53,9 +48,8 @@ describe("DATEPICKER_TESTS", () => {
 
         expect(screen.queryByText(getMonthNameInPolish(currentMonth.getMonth()))).not.toBeInTheDocument();
         expect(screen.getByText(getMonthNameInPolish(previousMonth.getMonth()))).toBeInTheDocument();
-    })
+    });
 
-    ////
     test('clicking > button displays next month', () => {
         renderDatepicker();
         const button = screen.getByRole("button", {name: '>'});
@@ -69,5 +63,5 @@ describe("DATEPICKER_TESTS", () => {
 
         expect(screen.queryByText(getMonthNameInPolish(currentMonth.getMonth()))).not.toBeInTheDocument();
         expect(screen.getByText(getMonthNameInPolish(nextMonth.getMonth()))).toBeInTheDocument();
-    })
+    });
 })
