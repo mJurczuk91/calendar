@@ -19,7 +19,7 @@ let currentDate = new Date();
 const initialState: IDateSlice = {
     viewMonth: currentDate.getMonth(),
     viewYear: currentDate.getFullYear(),
-    pickedDay: currentDate.getDay(),
+    pickedDay: currentDate.getDate(),
     pickedMonth: currentDate.getMonth(),
     pickedYear: currentDate.getFullYear(),
 };
