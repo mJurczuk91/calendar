@@ -16,13 +16,13 @@
 
 .today{
     color: rgb(210, 227, 252);
-    font-weight: 500;
+    font-weight: 500 !important;
     background-color: rgb(26, 115, 232) !important;
     border-radius: 50%;
 }
 
 .pickedDay{
-    font-weight: 500;
+    font-weight: 500 !important;
     background-color: rgb(210, 227, 252);
     border-radius: 50%;
 }

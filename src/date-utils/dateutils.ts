@@ -69,3 +69,8 @@ export const getMonthNameInPolish = (month:number):string => {
         }
     }
 }
+
+export const padWithZeros = (a:number) => {
+    if(a.toString().length === 1) return '0'+a.toString();
+    else return a;
+}

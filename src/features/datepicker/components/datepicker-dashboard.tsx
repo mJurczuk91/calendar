@@ -1,6 +1,6 @@
 import useDatepicker from "../hooks/useDatepicker";
 import useSetDatepicker from "../hooks/useSetDatepicker";
-import { sameDayMonthYear, sameMonth } from "../utils/datepicker-utils";
+import { sameDayMonthYear, sameMonth } from "../../../date-utils/dateutils";
 import classes from "./datepicker-dashboard.module.scss";
 
 const DatepickerDashboard: React.FC = () => {
@@ -24,7 +24,6 @@ const DatepickerDashboard: React.FC = () => {
             }
         }
 
-
         const incrementingDay = new Date(firstWeekStart);
         for (let i = 0; i < 6; i++) {
             let week = [];
@@ -37,7 +36,7 @@ const DatepickerDashboard: React.FC = () => {
                         className={
                             sameDayMonthYear(currentDay, today) ? classes.today :
                             sameDayMonthYear(currentDay, new Date(dates.pickedYear, dates.pickedMonth, dates.pickedDay)) ? classes.pickedDay :
-                            sameMonth(currentDay, new Date(dates.pickedYear, dates.pickedMonth, dates.pickedDay)) ? classes.currentMonth : ''
+                            sameMonth(currentDay, new Date(dates.viewYear, dates.viewMonth, 10)) ? classes.currentMonth : ''
                     }
                         onClick={dayClickHandler(currentDay)}
                     >      

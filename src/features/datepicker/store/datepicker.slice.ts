@@ -35,7 +35,6 @@ const DatepickerSlice = createSlice({
             } else {
                 state.viewMonth++;
             }
-            console.log(state.viewMonth)
         },
         setPreviousViewMonth(state) {
             if (state.viewMonth === 0) {
@@ -46,13 +45,9 @@ const DatepickerSlice = createSlice({
             }
         },
         setDate(state, {payload: {day, month, year}}: PayloadAction<ISetDate>) {
-            console.log(day, month, year);
-            console.log(state.viewMonth, state.viewYear)
-            
             state.pickedDay = day;
             state.pickedMonth = month;
             state.pickedYear = year;
-
 
             if(state.viewMonth !== month) state.viewMonth = month;
             if(state.viewYear !== year) state.viewYear = year;

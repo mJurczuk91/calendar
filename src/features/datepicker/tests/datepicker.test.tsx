@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 import { renderDatepicker } from './datepicker-test-utils';
-import { getMonthNameInPolish, getLastDayOfMonth } from '../utils/datepicker-utils';
+import { getMonthNameInPolish, getLastDayOfMonth } from '../../../date-utils/dateutils';
 import { text } from 'stream/consumers';
 import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';

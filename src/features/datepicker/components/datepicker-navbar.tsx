@@ -1,6 +1,6 @@
 import useDatepicker from '../hooks/useDatepicker';
 import useSetDatepicker from '../hooks/useSetDatepicker';
-import { getMonthNameInPolish } from '../utils/datepicker-utils';
+import { getMonthNameInPolish } from '../../../date-utils/dateutils';
 
 const DatepickerNavbar: React.FC = () => {
     const { viewPreviousMonth, viewNextMonth } = useSetDatepicker();
